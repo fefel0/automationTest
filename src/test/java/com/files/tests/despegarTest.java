@@ -1,26 +1,28 @@
 package com.files.tests;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class despegarTest {
+import com.files.driver.Driver;
+import com.files.pages.PageAlojamientos;
+
+public class despegarTest extends Driver {
   @Test
   public void despegar() throws Exception {
 	  
-	  System.setProperty("webdriver.chrome.driver", "C:/Drivers/chromedriver.exe");
-	  WebDriver driver = new ChromeDriver();
-	  driver.get("https://www.despegar.com.ar/");
-	  driver.manage().window().maximize();
+	  WebDriver driver = Driver.LevantarBrowser("CHROME", "https://www.despegar.com.ar/"); //Inicializo el driver llamado de la clase driver.
+	  PageAlojamientos pageVuelos = new PageAlojamientos(driver); //instancio la pagina home.
+	  pageVuelos.wait(10);
 	  
-	  
-	  WebDriverWait wait = new WebDriverWait(driver, 10);
+	  WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	  
 	  WebElement cookies = driver.findElement(By.xpath("//em[text()='Entendí']"));
 	  wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//em[text()='Entendí']")));
