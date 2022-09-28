@@ -53,6 +53,8 @@ public class PageAlojamientos {
 	@FindBy(css="//div[@class='sbox5-box-container']//em")
 	WebElement searchButton;
 	
+	
+	
 	public PageAlojamientos (WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);

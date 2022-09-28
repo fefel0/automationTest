@@ -23,14 +23,14 @@ public class Driver {
 		}
 		case FIREFOX:
 		{
-			System.setProperty("webdriver.chrome.driver", "C:/Drivers/geckodriver.exe");
+			System.setProperty("webdriver.gecko.driver", "C:/Drivers/geckodriver.exe");
 			Reporter.log("Abrir Navegador Firefox");
 			driver = new FirefoxDriver();
 			break;
 		}
 		case EDGE:
 		{
-			System.setProperty("webdriver.chrome.driver", "C:/Drivers/edgedriver.exe");
+			System.setProperty("webdriver.edge.driver", "C:/Drivers/edgedriver.exe");
 			Reporter.log("Abrir Navegador Edge");
 			driver = new EdgeDriver();
 			break;
@@ -50,9 +50,5 @@ public class Driver {
 	driver.get(url);
 	
 	return driver;
-}
-
-	public static void CloseBrowser(WebDriver driver) {
-		driver.quit();
-	}
+ }
 }

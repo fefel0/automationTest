@@ -14,16 +14,20 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 
-public class testDespegar {
+public class testDespegar extends Driver{
 	
 	WebDriver driver = null;
 	PageIndex pageHome = null;
 	
-  @BeforeMethod(alwaysRun = true )
+  @BeforeMethod(alwaysRun = true)
   public void iniciarTest(ITestContext context) {
-	  this.driver = Driver.LevantarBrowser("CHROME", "https://www.despegar.com.ar/");
+	  String navigatorSuite = context.getCurrentXmlTest().getParameter("nav");
+	  String navigator = navigatorSuite != null ? navigatorSuite : "CHROME";
+	  this.driver = Driver.LevantarBrowser(navigator, "https://www.despegar.com.ar");
+	  pageHome = new PageIndex(this.driver);
   }
-  
+	  
+	  
   @DataProvider
   public Object[][] dp() {
     return new Object[][] {
@@ -32,9 +36,9 @@ public class testDespegar {
     };
   }
 	
+  
   @Test(dataProvider = "dp")
   public void test(String destino, String edad) throws InterruptedException {
-	  pageHome = new PageIndex(this.driver);
 	  pageHome.CloseCookies();
 	  pageHome.CloseAlert();
 	  pageHome.redirect();
@@ -49,7 +53,7 @@ public class testDespegar {
   }
   
 
-  @AfterMethod
+  @AfterMethod(alwaysRun = true)
   public void afterMethod() {
 	  driver.close();
   }
